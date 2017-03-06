@@ -1,0 +1,23 @@
+{
+  "name": "node-lox-ws-api-testing",
+  "version": "0.0.1",
+  "description": "Testing script for Loxone WebSocket API",
+  "main": "test_loxapi.js",
+  "scripts": {
+    "start": "node test_loxapi.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alladdin/node-lox-ws-api-testing.git"
+  },
+  "author": "Ladislav Dokulil <alladdin@zemres.cz>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alladdin/node-lox-ws-api-testing/issues"
+  },
+  "homepage": "https://github.com/alladdin/node-lox-ws-api-testing#readme",
+  "dependencies": {
+    "node-lox-ws-api": "^0.2.6"
+  }
+}
