@@ -6,7 +6,7 @@ if (process.argv.length < 5){
 }
 
 var LoxoneAPI = require('node-lox-ws-api');
-var lox = new LoxoneAPI(process.argv[2], process.argv[3], process.argv[4], false, 'AES-256-CBC' /*'Hash'*/);
+var lox = new LoxoneAPI(process.argv[2], process.argv[3], process.argv[4], true, 'AES-256-CBC' /*'Hash'*/);
 var debug = true;
 
 function log_info(message) {
@@ -46,7 +46,7 @@ lox.on('close_failed', function() {
 });
 
 lox.on('connect_failed', function(error) {
-    log_info('Loxone connect failed: ' + error.toString());
+    log_info('Loxone connect failed!');
 });
 
 lox.on('connection_error', function(error) {
