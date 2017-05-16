@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/alladdin/node-lox-ws-api-testing#readme",
   "dependencies": {
-    "node-lox-ws-api": "^0.2.7"
+    "node-lox-ws-api": "^0.3.1"
   }
 }

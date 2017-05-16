@@ -9,6 +9,8 @@ var LoxoneAPI = require('node-lox-ws-api');
 var lox = new LoxoneAPI(process.argv[2], process.argv[3], process.argv[4], true, 'AES-256-CBC' /*'Hash'*/);
 var debug = true;
 
+var interval;
+
 function log_info(message) {
     console.log((new Date().toISOString())+' INFO : '+message);
 }
@@ -19,7 +21,8 @@ function log_debug(message) {
     }
 }
 
-function limit_str(text, limit = 100){
+function limit_str(text, limit){
+    limit = typeof limit !== 'undefined' ? limit : 100;
     text = ''+text;
     if (text.length <= limit){
         return text;
@@ -32,6 +35,7 @@ lox.on('connected', function() {
 });
 
 lox.on('close', function() {
+    //clearInterval(interval);
     log_info("Loxone closed!");
 });
 
@@ -59,6 +63,10 @@ lox.on('auth_failed', function(error) {
 
 lox.on('authorized', function() {
     log_info('Loxone authorized');
+    //interval = setInterval(function(){ lox.send_control_command("0b52aa23-010a-16f3-ffff112233445566/AI1", 'on') }, 5000);
+    //setTimeout(function(){ lox.send_command('jdev/sps/io/test_vstup_tl/on') }, 5000);
+    //setTimeout(function(){ lox.send_control_command('test_vstup_tl', 'off') }, 5000);
+    setTimeout(function(){ lox.send_command('jdev/cfg/version') }, 5000);
 });
 
 lox.on('keepalive', function(time) {
@@ -103,6 +111,10 @@ lox.on('update_event_value', function(uuid, evt) {
 
 lox.on('update_event_text', function(uuid, evt) {
     log_info('Update event text: uuid='+uuid+', evt='+limit_str(evt, 100)+'');
+});
+
+lox.on('message_text', function(message) {
+    log_info('On message_text: '+JSON.stringify(message));
 });
 
 process.on('SIGINT', function () {
